@@ -1,0 +1,28 @@
+<div style="display: block; height: 100vh">
+  <mat-drawer-container class="drawer-container" [hasBackdrop]="true">
+    <mat-drawer
+      #sidenav
+      [mode]="'over'"
+      [position]="'end'"
+      (closedStart)="clearSelectedPoi()"
+    >
+      <m7-poi *ngIf="selectedPoi" [poi]="selectedPoi"></m7-poi>
+    </mat-drawer>
+    <mat-drawer-content>
+      <mat-accordion *ngFor="let poi of pois">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ poi.nome }} </mat-panel-title>
+            <mat-panel-description>
+              Lat: {{ poi.latitude }}, Long: {{ poi.longitude }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>Maps</p>
+          <button mat-flat-button color="accent" (click)="openSidenav(poi)">
+            Ver veículos no POI
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

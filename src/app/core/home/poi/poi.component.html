@@ -1,0 +1,33 @@
+<div>
+  <form [formGroup]="filterForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Selecione um veículo</mat-label>
+      <mat-select formControlName="vehicle">
+        <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle">
+          {{ vehicle }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Escolha uma data</mat-label>
+      <input matInput [matDatepicker]="datepicker" formControlName="date" />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+    <button mat-flat-button color="accent" (click)="filterPositions()">
+      Filtrar
+    </button>
+  </form>
+  <mat-expansion-panel *ngFor="let position of positions">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ position.placa }} </mat-panel-title>
+      <mat-panel-description>
+        Lat: {{ position.latitude }} Long: {{ position.longitude }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>Maps</p>
+  </mat-expansion-panel>
+</div>
