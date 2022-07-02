@@ -28,6 +28,15 @@
         Lat: {{ position.latitude }} Long: {{ position.longitude }}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>Maps</p>
+    <div>
+      <m7-map
+        [latitude]="position.latitude"
+        [longitude]="position.longitude"
+      ></m7-map>
+      <p>Data: {{ position.data }}</p>
+      <p>Horário: {{ position.data }}</p>
+      <p>Velocidade: {{ position.velocidade }}</p>
+      <p>Estado do Veículo: {{ position.ignicao ? "Ligado" : "Desligado" }}</p>
+    </div>
   </mat-expansion-panel>
 </div>

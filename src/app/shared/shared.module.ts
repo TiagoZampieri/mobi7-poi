@@ -7,10 +7,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule],
+  declarations: [MapComponent],
+  imports: [CommonModule, GoogleMapsModule],
   exports: [
     MatExpansionModule,
     MatSelectModule,
@@ -19,6 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSidenavModule,
     MatButtonModule,
+    GoogleMapsModule,
+    MapComponent,
   ],
   providers: [MatDatepickerModule],
 })

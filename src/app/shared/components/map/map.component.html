@@ -1,0 +1,10 @@
+<google-map [center]="mapCircle" [zoom]="15">
+  <map-circle
+    *ngIf="radians"
+    [options]="mapOptions"
+    [center]="mapCircle"
+    [radius]="radians"
+  >
+  </map-circle>
+  <map-marker [position]="mapCircle" [options]="markerOption"></map-marker>
+</google-map>
