@@ -11,6 +11,7 @@ import {
   take,
 } from 'rxjs';
 import { POI } from 'src/app/models/poi.model';
+import { GoogleService } from 'src/app/shared/services/google/google.service';
 import { PoiService } from '../services/poi/poi.service';
 
 @Component({
@@ -27,7 +28,10 @@ export class HomeComponent implements OnInit {
   public mapCircle!: google.maps.LatLngLiteral;
   public markerOption: google.maps.MarkerOptions = { draggable: false };
   public isLoading = true;
-  constructor(private poiService: PoiService, private http: HttpClient) {}
+  constructor(
+    private poiService: PoiService,
+    private googleService: GoogleService
+  ) {}
 
   ngOnInit(): void {
     this.loadGoogleMapsAPI();
@@ -41,15 +45,10 @@ export class HomeComponent implements OnInit {
 
   private async loadGoogleMapsAPI(): Promise<void> {
     this.apiLoaded = await firstValueFrom(
-      this.http
-        .jsonp(
-          'https://maps.googleapis.com/maps/api/js?key=AIzaSyBmXXnI-ilPbwFMtEqR_oo53jAPTAVy5IQ',
-          'callback'
-        )
-        .pipe(
-          map(() => true),
-          catchError(() => of(false))
-        )
+      this.googleService.loadMapsApi().pipe(
+        map(() => true),
+        catchError(() => of(false))
+      )
     );
   }
 
