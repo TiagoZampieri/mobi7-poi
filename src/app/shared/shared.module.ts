@@ -7,6 +7,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './components/map/map.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -24,6 +26,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     GoogleMapsModule,
     MapComponent,
+    MatIconModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule,
   ],
   providers: [MatDatepickerModule],

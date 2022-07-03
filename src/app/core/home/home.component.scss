@@ -1,13 +1,13 @@
-.home-container {
-  padding: 2rem;
-}
-
 .drawer-container {
   height: 100%;
 }
 
 mat-drawer-container mat-drawer {
   width: 40vw;
+}
+
+.home-content {
+  padding: 2rem;
 }
 
 m7-map {

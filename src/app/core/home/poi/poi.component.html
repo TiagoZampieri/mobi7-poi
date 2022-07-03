@@ -1,7 +1,18 @@
-<div>
-  <form [formGroup]="filterForm">
+<div class="poi-content">
+  <form
+    [formGroup]="filterForm"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="8px"
+    fxLayout.lt-md="column"
+  >
     <mat-form-field appearance="fill">
       <mat-label>Selecione um veículo</mat-label>
+      <mat-spinner
+        matSuffix
+        [diameter]="24"
+        *ngIf="isLoadingVehicles"
+      ></mat-spinner>
       <mat-select formControlName="vehicle">
         <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle">
           {{ vehicle }}
@@ -17,26 +28,48 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
-    <button mat-flat-button color="accent" (click)="filterPositions()">
-      Filtrar
+    <button
+      class="filter-button"
+      mat-icon-button
+      aria-label="Filtrar"
+      [disabled]="filterForm.invalid"
+      (click)="filterPositions()"
+    >
+      <mat-icon color="primary">search</mat-icon>
     </button>
   </form>
+  <div fxLayoutAlign="center center" *ngIf="isLoadingPositions">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div fxLayoutAlign="center center" *ngIf="positions?.length === 0">
+    <p>Este veículo não esteve no raio deste ponto na data informada.</p>
+  </div>
+  <div fxLayoutAlign="center center" *ngIf="!positions && !isLoadingPositions">
+    <p>Selecione um veículo e data</p>
+  </div>
   <mat-expansion-panel *ngFor="let position of positions">
     <mat-expansion-panel-header>
       <mat-panel-title> {{ position.placa }} </mat-panel-title>
       <mat-panel-description>
-        Lat: {{ position.latitude }} Long: {{ position.longitude }}
+        {{ position.data | date: "hh:mm" }}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <div>
+    <div fxLayout.gt-sm="row" fxLayoutGap="16px">
       <m7-map
         [latitude]="position.latitude"
         [longitude]="position.longitude"
       ></m7-map>
-      <p>Data: {{ position.data }}</p>
-      <p>Horário: {{ position.data }}</p>
-      <p>Velocidade: {{ position.velocidade }}</p>
-      <p>Estado do Veículo: {{ position.ignicao ? "Ligado" : "Desligado" }}</p>
+      <div>
+        <p>Data: {{ position.data | date: "dd/MM/yyyy" }}</p>
+        <p>Horário: {{ position.data | date: "hh:mm" }}</p>
+        <p>
+          Posição: Lat {{ position.latitude }} Long {{ position.longitude }}
+        </p>
+        <p>Velocidade: {{ position.velocidade }}Km/h</p>
+        <p>
+          Estado do Veículo: {{ position.ignicao ? "Ligado" : "Desligado" }}
+        </p>
+      </div>
     </div>
   </mat-expansion-panel>
 </div>

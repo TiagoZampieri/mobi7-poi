@@ -1,15 +1,18 @@
-<div class="home-container">
-  <h1 class="mat-h1">Pontos de interesse</h1>
-  <mat-drawer-container class="drawer-container" [hasBackdrop]="true">
-    <mat-drawer
-      #sidenav
-      [mode]="'over'"
-      [position]="'end'"
-      (closedStart)="clearSelectedPoi()"
-    >
-      <m7-poi *ngIf="selectedPoi" [poi]="selectedPoi"></m7-poi>
-    </mat-drawer>
-    <mat-drawer-content>
+<mat-drawer-container class="drawer-container" [hasBackdrop]="true">
+  <mat-drawer
+    #sidenav
+    [mode]="'over'"
+    [position]="'end'"
+    (closedStart)="clearSelectedPoi()"
+  >
+    <m7-poi *ngIf="selectedPoi" [poi]="selectedPoi"></m7-poi>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="home-content">
+      <h1 class="mat-h1">Pontos de interesse</h1>
+      <div fxLayoutAlign="center center" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+      </div>
       <mat-accordion>
         <mat-expansion-panel
           *ngFor="let poi of pois"
@@ -36,6 +39,6 @@
           </div>
         </mat-expansion-panel>
       </mat-accordion>
-    </mat-drawer-content>
-  </mat-drawer-container>
-</div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

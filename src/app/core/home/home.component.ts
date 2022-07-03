@@ -1,7 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { catchError, firstValueFrom, lastValueFrom, map, of, take } from 'rxjs';
+import {
+  catchError,
+  finalize,
+  firstValueFrom,
+  lastValueFrom,
+  map,
+  of,
+  take,
+} from 'rxjs';
 import { POI } from 'src/app/models/poi.model';
 import { PoiService } from '../services/poi/poi.service';
 
@@ -18,6 +26,7 @@ export class HomeComponent implements OnInit {
   public mapOptions!: google.maps.MapOptions;
   public mapCircle!: google.maps.LatLngLiteral;
   public markerOption: google.maps.MarkerOptions = { draggable: false };
+  public isLoading = true;
   constructor(private poiService: PoiService, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -31,7 +40,6 @@ export class HomeComponent implements OnInit {
   }
 
   private async loadGoogleMapsAPI(): Promise<void> {
-    console.log('load google api');
     this.apiLoaded = await firstValueFrom(
       this.http
         .jsonp(
@@ -40,19 +48,18 @@ export class HomeComponent implements OnInit {
         )
         .pipe(
           map(() => true),
-          catchError((error) => {
-            console.log('error', error);
-            return of(false);
-          })
+          catchError(() => of(false))
         )
     );
-    console.log('apiLoaded', this.apiLoaded);
   }
 
   private getPois(): void {
     this.poiService
       .getPois()
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        finalize(() => (this.isLoading = false))
+      )
       .subscribe({
         next: (response) => {
           this.pois = response;

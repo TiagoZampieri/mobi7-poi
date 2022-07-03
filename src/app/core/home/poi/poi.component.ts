@@ -6,7 +6,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import { race, take } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { POI } from 'src/app/models/poi.model';
 import { Position } from 'src/app/models/position.model';
 import { UtilsService } from 'src/app/shared/services/utils/utils.service';
@@ -23,6 +23,8 @@ export class PoiComponent implements OnInit {
   public vehicles!: string[];
   public positions!: Position[];
   public filterForm!: FormGroup;
+  public isLoadingVehicles = true;
+  public isLoadingPositions!: boolean;
   constructor(
     private vehicleService: VehicleService,
     private positionService: PositionService,
@@ -38,7 +40,10 @@ export class PoiComponent implements OnInit {
   private getVehicles(): void {
     this.vehicleService
       .getVehicles()
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        finalize(() => (this.isLoadingVehicles = false))
+      )
       .subscribe({
         next: (response) => {
           this.vehicles = response;
@@ -47,9 +52,13 @@ export class PoiComponent implements OnInit {
   }
 
   private getPositions(vehicle: string, date: string): void {
+    this.isLoadingPositions = true;
     this.positionService
       .getPositions(vehicle, date)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        finalize(() => (this.isLoadingPositions = false))
+      )
       .subscribe({
         next: (response) => {
           this.positions = response.filter(
@@ -69,7 +78,7 @@ export class PoiComponent implements OnInit {
   private buildForm(): FormGroup {
     return this.formBuilder.group({
       vehicle: new FormControl('', [Validators.required]),
-      date: new FormControl(),
+      date: new FormControl('', [Validators.required]),
     });
   }
 
