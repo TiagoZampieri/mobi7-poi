@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './components/map/map.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [MapComponent],
@@ -23,6 +24,7 @@ import { MapComponent } from './components/map/map.component';
     MatButtonModule,
     GoogleMapsModule,
     MapComponent,
+    FlexLayoutModule,
   ],
   providers: [MatDatepickerModule],
 })
