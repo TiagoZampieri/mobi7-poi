@@ -1,15 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import {
-  catchError,
-  finalize,
-  firstValueFrom,
-  lastValueFrom,
-  map,
-  of,
-  take,
-} from 'rxjs';
+import { catchError, finalize, firstValueFrom, map, of, take } from 'rxjs';
 import { POI } from 'src/app/models/poi.model';
 import { GoogleService } from 'src/app/shared/services/google/google.service';
 import { PoiService } from '../services/poi/poi.service';
