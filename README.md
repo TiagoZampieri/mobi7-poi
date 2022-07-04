@@ -1,27 +1,16 @@
 # Mobi7Poi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.4.
+Projeto criado com [Angular CLI](https://github.com/angular/angular-cli) versão 14.0.4.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Rodar `npm install` para instalar as dependências do projeto.
 
-## Code scaffolding
+Rodar `ng serve` para serivdor local. Entrar no `http://localhost:4200/`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Bibliotecas utilizadas
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- @angular/flex-layout versão 14.0.0-beta.40
+- @angular/google-maps versão 14.0.4
+- @angular/material versão 14.0.4",
+- dayjs versão 1.11.3
